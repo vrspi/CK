@@ -18,6 +18,7 @@ public class CodeWhiz {
     private String UserAnswer;
     private List<String> programmingKeywords;
     private List<String> wellbeingKeywords;
+    private List<String> GreetingsKeywords;
     private String programmingPattern;
     private String greetingsPattern;
     private String wellbeingPattern;
@@ -58,6 +59,7 @@ public class CodeWhiz {
         Username = u.GetUsername();
         programmingKeywords = getProgrammingKeywords();
         wellbeingKeywords = getWellBeingKeywords();
+        GreetingsKeywords = getGreetingsKeywords();
         setProgrammingPattern(".*\\b(cod(e|ing)|program(s|ming)?|algorithm(s)?|function(s)?|variable(s)?|class(es)?|method(s)?|object(s)?|library|interface(s)?|package(s)?|syntax|debug(ging)?|compile(r|d)?|build(ing)?|script(s)?|statement(s)?|loop(s)?|condition(s)?|expression(s)?|module(s)?|codebase(s)?|implementation(s)?|inheritance|polymorphism|encapsulation)\\b.*");
         setStepsPattern(".*\\b(step(s)?|process(es)?|procedure(s)?|guide(s)?|instruction(s)?|manual(s)?|walkthrough(s)?|tutorial(s)?|how\\s(to)?|setup(s)?|configuration(s)?|installation(s)?|operation(s)?|workflow(s)?|task(s)?|flowchart(s)?|map(s)?|checklist(s)?)\\b.*");
         this.programmingRegex = Pattern.compile(programmingPattern, Pattern.CASE_INSENSITIVE);
@@ -98,7 +100,12 @@ public class CodeWhiz {
         this.wellbeingMatcher = wellbeingRegex.matcher(Query);
         int x=0;
             if(greetingsMatcher.matches()){
-                System.out.println("CodeWhiz : Hi");
+                Random random = new Random();
+                // System.out.println(wellbeingKeywords.size()); 
+                int index = random.nextInt(GreetingsKeywords.size());
+                
+                String randomString = GreetingsKeywords.get(index);
+                System.out.println("CodeWhiz : "+randomString);
                 
                 x=1;
                 
@@ -179,6 +186,22 @@ public class CodeWhiz {
         
 
         return wellbeing;
+    }
+    public List<String> getGreetingsKeywords() {
+        List<String> Greetings = new ArrayList<>();
+        String filename = "chatkay\\src\\main\\java\\CodePackage\\greetings.txt";
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(filename));
+            for (String line : lines) {
+                // Do something with each keyword
+                Greetings.add(line.trim().toLowerCase());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+
+        return Greetings;
     }
     private int RecheckQuery(String Query){
         this.programmingMatcher = programmingRegex.matcher(Query);
