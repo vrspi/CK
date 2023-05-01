@@ -6,7 +6,7 @@ public class User {
     private String Password;
     private String Email;
 
-    User(String Username,String Password){
+    public User(String Username,String Password){
         this.Username = Username;
         this.Password = Password;
         this.Email = "new_Email";

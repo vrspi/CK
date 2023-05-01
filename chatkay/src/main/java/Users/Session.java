@@ -8,7 +8,7 @@ public class Session {
     private DateTime SessionStart;
     private DateTime SessionEnd;
 
-    Session(User user){
+    public Session(User user){
         this.user = user;
         SessionStart = DateTime.now();
         IsOpen = true;
@@ -18,6 +18,11 @@ public class Session {
     public void EndSession(){
         IsOpen = false;
         SessionEnd = DateTime.now();        
+    }
+
+    public User GetUser() {
+        return user;
+        
     }
     
 }
