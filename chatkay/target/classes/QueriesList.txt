@@ -2,3 +2,5 @@
 /disconnect/-Delete session and log out user
 /MAXL(x)/-Change the maximum of charachters KAY can write in a single paragraph
 /Pass((ConnfirmPassword),(NewPassword))/-Change your password
+/list/-List all queries
+/info/-Get informations about current account

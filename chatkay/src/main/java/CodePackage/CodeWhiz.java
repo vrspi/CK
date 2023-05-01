@@ -161,7 +161,10 @@ public class CodeWhiz {
             Request ="/exit/";
            return true; 
         }
-        
+        if(Query.startsWith("/list/")){
+            Request ="/list/";
+           return true; 
+        }
        
         return false;
     }
@@ -244,9 +247,30 @@ public class CodeWhiz {
                 System.out.println("CodeWhiz : please try again!");
             }
             if(IsItRequest){
-                ReInisialise();
+                if(Request=="/exit/"){
+                     ReInisialise();
                 App.setChoix(0);
                 App.main(null);
+                }
+                if(Request=="/list/"){
+                    ReInisialise();
+                    String filename = "chatkay\\src\\main\\java\\QueriesList.txt";
+                     try {
+                          List<String> lines = Files.readAllLines(Paths.get(filename));
+                          System.out.println("########################################");
+                             for (String line : lines) {
+                             // Do something with each keyword
+                             String Col[] = line.split("-");
+                            System.out.println(Col[0]+"    -    "+Col[1]);
+
+                             }
+                         System.out.println("########################################");
+
+                         } catch (Exception e) {
+                            e.printStackTrace();
+                            }
+                 }
+               
             }
             
         }
