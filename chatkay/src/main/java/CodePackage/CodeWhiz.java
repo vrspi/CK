@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,6 +17,7 @@ public class CodeWhiz {
     private String Username;
     private String UserAnswer;
     private List<String> programmingKeywords;
+    private List<String> wellbeingKeywords;
     private String programmingPattern;
     private String greetingsPattern;
     private String wellbeingPattern;
@@ -24,7 +26,6 @@ public class CodeWhiz {
     public void setWellbeingPattern(String wellbeingPattern) {
         this.wellbeingPattern = wellbeingPattern;
     }
-
     public void setGreetingsPattern(String greetingsPattern) {
         this.greetingsPattern = greetingsPattern;
     }
@@ -40,27 +41,23 @@ public class CodeWhiz {
     public String getProgrammingPattern() {
         return programmingPattern;
     }
-
     public void setProgrammingPattern(String programmingPattern) {
         this.programmingPattern = programmingPattern;
     }
-    
-
     public String getStepsPattern() {
         return stepsPattern;
     }
-
     public void setStepsPattern(String stepsPattern) {
         this.stepsPattern = stepsPattern;
     }
-
     public void setProgrammingKeywords(List<String> programmingKeywords) {
         this.programmingKeywords = programmingKeywords;
     }
-
+   
     public CodeWhiz(User u){
         Username = u.GetUsername();
         programmingKeywords = getProgrammingKeywords();
+        wellbeingKeywords = getWellBeingKeywords();
         setProgrammingPattern(".*\\b(cod(e|ing)|program(s|ming)?|algorithm(s)?|function(s)?|variable(s)?|class(es)?|method(s)?|object(s)?|library|interface(s)?|package(s)?|syntax|debug(ging)?|compile(r|d)?|build(ing)?|script(s)?|statement(s)?|loop(s)?|condition(s)?|expression(s)?|module(s)?|codebase(s)?|implementation(s)?|inheritance|polymorphism|encapsulation)\\b.*");
         setStepsPattern(".*\\b(step(s)?|process(es)?|procedure(s)?|guide(s)?|instruction(s)?|manual(s)?|walkthrough(s)?|tutorial(s)?|how\\s(to)?|setup(s)?|configuration(s)?|installation(s)?|operation(s)?|workflow(s)?|task(s)?|flowchart(s)?|map(s)?|checklist(s)?)\\b.*");
         this.programmingRegex = Pattern.compile(programmingPattern, Pattern.CASE_INSENSITIVE);
@@ -73,7 +70,7 @@ public class CodeWhiz {
     public void Start(){
         
       
-        System.out.println("CodeWhiz : Welcome to KAY CodeWhiz Mr/Mme."+Username);
+        System.out.println("CodeWhiz : Welcome to KAY CodeWhiz Mr/Mme : "+Username);
         System.out.println("CodeWhiz : How can I assist you?");
         Giveword();
         switch (RecheckQuery(UserAnswer)) {
@@ -84,10 +81,10 @@ public class CodeWhiz {
                 
                 break;
             case -1:
-            
-            IsItCode = false;
-            IsItRequest = false;            
-            Giveword();
+
+                IsItCode = false;
+                IsItRequest = false;            
+                Giveword();
                 break;
             
             default:
@@ -108,13 +105,21 @@ public class CodeWhiz {
                 
             }
             if(wellbeingMatcher.matches()){
+                Random random = new Random();
+                // System.out.println(wellbeingKeywords.size()); 
+                int index = random.nextInt(wellbeingKeywords.size());
                 
-                if(x==1)
-                System.out.println("I'm doing well thank you!");
+                String randomString = wellbeingKeywords.get(index);
+                if(x==1){
+                    
+                   
+                    System.out.println(randomString);
+                }
+                
 
                 else{
                     x=1;
-                    System.out.println("CodeWhiz : I'm doing well thank you!");
+                    System.out.println("CodeWhiz : "+randomString);
                 }
                 
             }
@@ -158,6 +163,22 @@ public class CodeWhiz {
         
 
         return programmingKeywords;
+    }
+    public List<String> getWellBeingKeywords() {
+        List<String> wellbeing = new ArrayList<>();
+        String filename = "chatkay\\src\\main\\java\\CodePackage\\wellbeing.txt";
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(filename));
+            for (String line : lines) {
+                // Do something with each keyword
+                wellbeing.add(line.trim().toLowerCase());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+
+        return wellbeing;
     }
     private int RecheckQuery(String Query){
         this.programmingMatcher = programmingRegex.matcher(Query);
