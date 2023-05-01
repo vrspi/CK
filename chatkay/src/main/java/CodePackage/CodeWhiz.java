@@ -1,7 +1,5 @@
 package CodePackage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -26,6 +24,7 @@ public class CodeWhiz {
     private Matcher wellbeingMatcher;
     private Pattern wellbeingRegex;
     private String Request;
+    private Scanner sc = new Scanner(System.in);
     public String getRequest() {
         return Request;
     }
@@ -82,7 +81,7 @@ public class CodeWhiz {
         Giveword();
         switch (RecheckQuery(UserAnswer)) {
             case 1:
-                
+               
                 break;
             case 2:
                 
@@ -219,8 +218,11 @@ public class CodeWhiz {
     private int RecheckQuery(String Query){
         this.programmingMatcher = programmingRegex.matcher(Query);
         this.stepsMatcher = stepsRegex.matcher(Query);
-        if (programmingMatcher.matches()) {
-             System.out.println("The user is asking about programming.");
+        if (programmingMatcher.matches()){
+            CodeScrapper Cs = new CodeScrapper(UserAnswer);
+            System.err.println(Cs.Start());
+            ReInisialise();
+            Giveword();
             return 1;
 
         } else if (stepsMatcher.matches()) {
@@ -232,7 +234,7 @@ public class CodeWhiz {
         }
     }
     private void Giveword(){
-        Scanner sc = new Scanner(System.in);
+        
        
         while(!IsItCode && !IsItRequest){  
             System.out.print(Username+" : ");
@@ -274,7 +276,7 @@ public class CodeWhiz {
             }
             
         }
-        sc.close();
+        // sc.close();
     }
 
     public void ReInisialise(){

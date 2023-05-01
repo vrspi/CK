@@ -1,4 +1,4 @@
-package CodePackage;
+package Tools;
 
 import java.util.Properties;
 
