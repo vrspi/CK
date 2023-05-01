@@ -2,6 +2,8 @@ package CodePackage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,7 +31,7 @@ public class CodeWhiz {
         Scanner sc = new Scanner(System.in);
         System.out.println("CodeWhiz : Welcome to KAY CodeWhiz Mr/Mme."+Username);
         System.out.println("CodeWhiz : How can I assist you?");
-        while(!IsItCode || !IsItRequest){
+        while(!IsItCode && !IsItRequest){
            
             System.out.print(Username+" : ");
             UserAnswer = sc.nextLine();
@@ -49,9 +51,11 @@ public class CodeWhiz {
         List<String> programmingKeywords = getProgrammingKeywords();
         Query = Query.toLowerCase();
 
-        for (String keyword : programmingKeywords) {
-            if (Query.contains(keyword)) {
-                return true;
+        for (String Word : Query.split(" ")) {
+            for (String keyword : programmingKeywords) {
+                if (Word.equals(keyword)) {                
+                    return true;
+                }
             }
         }
 
@@ -61,17 +65,19 @@ public class CodeWhiz {
 
         return false;
     }
-    public static List<String> getProgrammingKeywords() {
+    public List<String> getProgrammingKeywords() {
         List<String> programmingKeywords = new ArrayList<>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader("programming_keywords.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
+        String filename = "chatkay\\src\\main\\java\\CodePackage\\programming_keywords.txt";
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(filename));
+            for (String line : lines) {
+                // Do something with each keyword
                 programmingKeywords.add(line.trim().toLowerCase());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
 
         return programmingKeywords;
     }
