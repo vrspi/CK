@@ -22,6 +22,7 @@ public class CodeWhiz {
             IsItCode = CheckIfCode(UserAnswer);
             IsItRequest = CheckIfRequest(UserAnswer);
         }
+        sc.close();
         
     }
     private boolean CheckIfCode(String Query){

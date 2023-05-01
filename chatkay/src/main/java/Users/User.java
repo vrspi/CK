@@ -1,7 +1,7 @@
 package Users;
 
 public class User {
-    private int ID;
+    
     private String Username;
     private String Password;
     private String Email;
