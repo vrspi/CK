@@ -10,6 +10,14 @@ public class App
 {
      private static int choix=0;
     
+    public static int getChoix() {
+        return choix;
+    }
+
+    public static void setChoix(int choix) {
+        App.choix = choix;
+    }
+
     public static void main( String[] args )
     {   
         Session session = new Session(new User("Khaireddine", "null"));

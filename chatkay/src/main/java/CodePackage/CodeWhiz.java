@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import Users.User;
+import kay.App;
 
 public class CodeWhiz {
     private String Username;
@@ -24,6 +25,10 @@ public class CodeWhiz {
     private String wellbeingPattern;
     private Matcher wellbeingMatcher;
     private Pattern wellbeingRegex;
+    private String Request;
+    public String getRequest() {
+        return Request;
+    }
     public void setWellbeingPattern(String wellbeingPattern) {
         this.wellbeingPattern = wellbeingPattern;
     }
@@ -152,7 +157,12 @@ public class CodeWhiz {
         return false;
     }
     private boolean CheckIfRequest(String Query){
-
+        if(Query.startsWith("/exit/")){
+            Request ="/exit/";
+           return true; 
+        }
+        
+       
         return false;
     }
     public List<String> getProgrammingKeywords() {
@@ -233,8 +243,20 @@ public class CodeWhiz {
                 System.out.println("CodeWhiz : Your questiion is not about any programming topic!");
                 System.out.println("CodeWhiz : please try again!");
             }
+            if(IsItRequest){
+                ReInisialise();
+                App.setChoix(0);
+                App.main(null);
+            }
+            
         }
         sc.close();
+    }
+
+    public void ReInisialise(){
+        IsItCode = false;
+        IsItRequest = false;
+        Request = "";
     }
 
 }
