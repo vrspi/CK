@@ -7,7 +7,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Users.User;
 
@@ -15,7 +16,28 @@ public class CodeWhiz {
     private String Username;
     private String UserAnswer;
     private List<String> programmingKeywords;
+    private String programmingPattern;
+    private Matcher programmingMatcher;
+    private Matcher stepsMatcher;
+    private Pattern programmingRegex;
+    private Pattern stepsRegex;
+    private String stepsPattern;
+    public String getProgrammingPattern() {
+        return programmingPattern;
+    }
 
+    public void setProgrammingPattern(String programmingPattern) {
+        this.programmingPattern = programmingPattern;
+    }
+    
+
+    public String getStepsPattern() {
+        return stepsPattern;
+    }
+
+    public void setStepsPattern(String stepsPattern) {
+        this.stepsPattern = stepsPattern;
+    }
 
     public void setProgrammingKeywords(List<String> programmingKeywords) {
         this.programmingKeywords = programmingKeywords;
@@ -24,6 +46,10 @@ public class CodeWhiz {
     public CodeWhiz(User u){
         Username = u.GetUsername();
         programmingKeywords = getProgrammingKeywords();
+        setProgrammingPattern(".*\\b(cod(e|ing)|program(s|ming)?|algorithm(s)?|function(s)?|variable(s)?|class(es)?|method(s)?|object(s)?|library|interface(s)?|package(s)?|syntax|debug(ging)?|compile(r|d)?|build(ing)?|script(s)?|statement(s)?|loop(s)?|condition(s)?|expression(s)?|module(s)?|codebase(s)?|implementation(s)?|inheritance|polymorphism|encapsulation)\\b.*");
+        setStepsPattern(".*\\b(step(s)?|process(es)?|procedure(s)?|guide(s)?|instruction(s)?|manual(s)?|walkthrough(s)?|tutorial(s)?|how\\s(to)?|setup(s)?|configuration(s)?|installation(s)?|operation(s)?|workflow(s)?|task(s)?|flowchart(s)?|map(s)?|checklist(s)?)\\b.*");
+        this.programmingRegex = Pattern.compile(programmingPattern, Pattern.CASE_INSENSITIVE);
+        this.stepsRegex = Pattern.compile(stepsPattern, Pattern.CASE_INSENSITIVE);
     }
     public void Start(){
         boolean IsItCode = false;
@@ -43,7 +69,7 @@ public class CodeWhiz {
 
             }
         }
-        System.out.println("CodeWhiz : You are asking about code!");
+        RecheckQuery(UserAnswer);
         sc.close();
         
     }
@@ -81,5 +107,17 @@ public class CodeWhiz {
 
         return programmingKeywords;
     }
+    private void RecheckQuery(String Query){
+        this.programmingMatcher = programmingRegex.matcher(Query);
+        this.stepsMatcher = stepsRegex.matcher(Query);
+        if (programmingMatcher.matches()) {
+            System.out.println("The user is asking about programming.");
+        } else if (stepsMatcher.matches()) {
+            System.out.println("The user is asking about step-by-step processes.");
+        } else {
+            System.out.println("The query is not related to programming or steps.");
+        }
+    }
+
 
 }
