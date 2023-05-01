@@ -1,0 +1,261 @@
+algorithm
+API
+application
+back-end
+code
+compiler
+data structure
+database
+debugging
+dependency
+design pattern
+devops
+framework
+front-end
+function
+IDE
+library
+mobile development
+object-oriented
+programming
+script
+source code
+syntax
+testing
+variable
+web development
+API
+Java
+Python
+C++
+C#
+HTML
+CSS
+JavaScript
+React
+Node.js
+Ruby on Rails
+abstract
+access modifier
+anonymous function
+argument
+array
+asynchronous
+bit
+Boolean
+byte
+class
+closure
+collection
+concurrency
+constructor
+control structure
+debugger
+decomposition
+delegation
+encapsulation
+exception
+expression
+factory
+float
+garbage collection
+getter
+hash table
+immutable
+inheritance
+instance
+interface
+lambda
+loop
+method
+module
+mutable
+namespace
+null
+object
+operator
+overloading
+override
+package
+parameter
+polymorphism
+primitive type
+private
+protected
+public
+recursion
+reference type
+reflection
+setter
+stack
+static
+string
+subroutine
+synchronization
+thread
+throw
+try-catch
+type
+type casting
+unit test
+void
+API design
+architecture
+assembly language
+bytecode
+client-server
+command line
+composition
+configuration
+CRUD
+data access
+data binding
+data modeling
+data validation
+database schema
+dependency injection
+directive
+event
+exception handling
+file I/O
+filter
+form
+front-end framework
+full-stack
+getter and setter
+graph database
+hash function
+HTTP
+inversion of control
+JSON
+key-value store
+lifecycle
+logging
+middleware
+MVC
+MVVM
+namespaces
+ORM
+parameterized query
+pipeline
+platform
+profiling
+query optimization
+RDBMS
+RESTful
+router
+serialization
+session
+singleton
+SOAP
+state management
+stream processing
+template
+testing framework
+transaction
+version control
+WSDL
+XML
+algorithm complexity
+anonymity
+API gateway
+artificial intelligence
+automation
+behavior-driven development
+big data
+blockchain
+browser compatibility
+bytecode interpreter
+chatbot
+cloud computing
+closure compiler
+cluster
+code coverage
+code smell
+cognitive computing
+compiler optimization
+computational geometry
+computational linguistics
+continuous delivery
+continuous integration
+containerization
+convolutional neural network
+cross-platform
+crowdsourcing
+CUDA
+cybersecurity
+data compression
+data pipeline
+data privacy
+data science
+data visualization
+data warehousing
+debugging tools
+deep learning
+dependency management
+desktop application
+devsecops
+distributed system
+document database
+e-commerce
+edge computing
+embedded system
+encryption
+event-driven architecture
+evolutionary algorithm
+feature engineering
+fuzzy logic
+game development
+GDPR
+genetic algorithm
+geospatial data
+graphical user interface
+Hadoop
+hashing algorithm
+health informatics
+high availability
+human-computer interaction
+hyperparameter tuning
+image recognition
+immutable object
+internet of things
+iterative development
+Jenkins
+Kubernetes
+lambda architecture
+machine learning
+microservices
+middleware integration
+mixed reality
+natural language processing
+neural network
+object-relational mapping
+open-source software
+parallel computing
+pattern recognition
+performance tuning
+predictive analytics
+quantum computing
+real-time system
+recommendation engine
+refactoring
+reinforcement learning
+responsive design
+robotics
+scalability
+self-organizing system
+serverless computing
+software architecture
+software quality assurance
+software testing
+source control
+spatial data
+speech recognition
+supervised learning
+support vector machine
+taint analysis
+text mining
+time series analysis
+transaction management
+unsupervised learning
+virtual reality
