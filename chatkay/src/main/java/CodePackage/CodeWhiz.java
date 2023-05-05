@@ -218,17 +218,18 @@ public class CodeWhiz {
     private int RecheckQuery(String Query){
         this.programmingMatcher = programmingRegex.matcher(Query);
         this.stepsMatcher = stepsRegex.matcher(Query);
-        if (programmingMatcher.matches()){
-            CodeScrapper Cs = new CodeScrapper(UserAnswer);
-            System.err.println(Cs.Start());
-            ReInisialise();
-            Giveword();
-            return 1;
+        if (stepsMatcher.matches()) {
+            System.out.println("The user is asking about step-by-step processes.");
+           return 2;
+       }
+       else  if (programmingMatcher.matches()){
+        CodeScrapper Cs = new CodeScrapper(UserAnswer);
+        System.err.println(Cs.Start());
+        ReInisialise();
+        Giveword();
+        return 1;
 
-        } else if (stepsMatcher.matches()) {
-             System.out.println("The user is asking about step-by-step processes.");
-            return 2;
-        } else {
+    }  else {
              System.out.println("The query is not related to programming or steps.");
             return -1;
         }

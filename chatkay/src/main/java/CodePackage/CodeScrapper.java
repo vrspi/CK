@@ -9,11 +9,22 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import Tools.pipline;
+import Tools.tokenizer;
+import edu.stanford.nlp.pipeline.Annotation;
 public class CodeScrapper {
     private String Query;
     private String url;
     private Document document;
     private String Language;
+    private List<String> QueryWords;
+
+
+    public List<String> getQueryWords() {
+        return QueryWords;
+    }
+
     public String getLanguage() {
         return Language;
     }
@@ -41,6 +52,8 @@ public class CodeScrapper {
     public CodeScrapper(String Query){
         this.Query = Query;
         url  = "https://codepal.ai/";
+        tokenizer Tokenizer = new tokenizer(Query);
+        QueryWords = Tokenizer.tokenize();
 
     }
     public String Start(){

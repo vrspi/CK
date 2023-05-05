@@ -8,7 +8,7 @@ public class pipline {
     
     private static StanfordCoreNLP stanfordCoreNLP;
     private static Properties properties;
-    private static String PropertiesName = "tokenize, ssplit, pos";
+    private static String PropertiesName = "tokenize, ssplit, pos, lemma, stopword";
     
 
     private pipline(){
@@ -16,7 +16,7 @@ public class pipline {
     }
     static{
         properties = new Properties();
-        properties.setProperty("annotators", PropertiesName);
+        properties.setProperty("annotators, tokenize, ssplit, pos, lemma, stopword", PropertiesName);
     }
 
     public static StanfordCoreNLP getPipline(){

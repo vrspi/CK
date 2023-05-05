@@ -2,6 +2,7 @@ package Tools;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.CoreDocument;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
@@ -21,7 +22,14 @@ public class tokenizer {
 
        List<CoreLabel> l = coreDocument.tokens();
        for (CoreLabel coreLabel : l) {
-        list.add(coreLabel.originalText());
+        String lemma = coreLabel.get(CoreAnnotations.LemmaAnnotation.class);
+        String posTag = coreLabel.get(CoreAnnotations.PartOfSpeechAnnotation.class);
+
+        if (posTag.startsWith("VB")) {
+            list.add(lemma);
+        } else {
+            list.add(coreLabel.originalText());
+        }
        }
        return list;
     }
