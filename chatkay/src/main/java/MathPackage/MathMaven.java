@@ -3,7 +3,6 @@ import java.lang.Math;
 public class MathMaven {
     public String Query;
         public static void main(String[] args) {
-        SumNumb(5+5);
         toBinary(31); 
         System.out.println("Hexadecimal of values decimal is: "+toHex(289));  
         System.out.println("Decimal of values binary is: "+getDecimalFromBinary(10101));  
