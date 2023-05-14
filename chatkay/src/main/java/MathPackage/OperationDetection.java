@@ -37,6 +37,7 @@ public class OperationDetection {
         Pattern divPattern = Pattern.compile("(quotient|divide|division|quotent|devide|devision)\\s*(of)?\\s*(\\d+(\\.\\d+)?)\\s*(and|with)?\\s*(\\d+(\\.\\d+)?)", Pattern.CASE_INSENSITIVE);
         Pattern Logpattern = Pattern.compile("\\b(logarithm\\s+of\\s+\\S+|log\\s*\\([^\\)]+\\)|log(?!\\())", Pattern.CASE_INSENSITIVE);
         Pattern Increasingpattern = Pattern.compile("(increment|increase|add)\\s+(\\d+)\\s+by\\s+(\\d+)\\b", Pattern.CASE_INSENSITIVE);
+        Pattern decreasingpattern = Pattern.compile("(decrement|decrease|minus)\\s+(\\d+)\\s+by\\s+(\\d+)\\b", Pattern.CASE_INSENSITIVE);
 
         
         Matcher matcher;
@@ -68,6 +69,10 @@ public class OperationDetection {
         matcher = Increasingpattern.matcher(sentence);
         if (matcher.find()) {
             return "Increasing";
+        }
+        matcher = decreasingpattern.matcher(sentence);
+        if (matcher.find()) {
+            return "decreasing";
         }
         return "unknown";
     }

@@ -79,6 +79,11 @@ public class CodeWhiz {
         System.out.println("CodeWhiz : Welcome to KAY CodeWhiz Mr/Mme : "+Username);
         System.out.println("CodeWhiz : How can I assist you?");
         Giveword();
+        redirect();
+      
+        
+    }
+    private void redirect() {
         switch (RecheckQuery(UserAnswer)) {
             case 1:
                
@@ -96,8 +101,6 @@ public class CodeWhiz {
             default:
                 break;
         } ;
-      
-        
     }
     private boolean CheckIfGreetings(String Query) {
         this.greetingsMatcher = greetingsRegex.matcher(Query);
@@ -220,6 +223,8 @@ public class CodeWhiz {
         this.stepsMatcher = stepsRegex.matcher(Query);
         if (stepsMatcher.matches()) {
             System.out.println("The user is asking about step-by-step processes.");
+            ReInisialise();
+            Giveword();
            return 2;
        }
        else  if (programmingMatcher.matches()){
@@ -238,6 +243,7 @@ public class CodeWhiz {
         
        
         while(!IsItCode && !IsItRequest){  
+           // System.out.println("######## Is it code:"+IsItCode+"  Is It request:  "+IsItRequest);
             System.out.print(Username+" : ");
             UserAnswer = sc.nextLine();
             if(CheckIfGreetings(UserAnswer)){
@@ -248,6 +254,10 @@ public class CodeWhiz {
             if(!IsItCode && !IsItRequest){
                 System.out.println("CodeWhiz : Your questiion is not about any programming topic!");
                 System.out.println("CodeWhiz : please try again!");
+            }else{
+                if(IsItCode){
+                    redirect();
+                }
             }
             if(IsItRequest){
                 if(Request=="/exit/"){
@@ -275,7 +285,8 @@ public class CodeWhiz {
                  }
                
             }
-            
+            ReInisialise();
+
         }
         // sc.close();
     }

@@ -11,25 +11,25 @@ public class tokenizer {
     
     private StanfordCoreNLP stanfordCoreNLP = pipline.getPipline();
     private String Text ="";
-    private List<String> list = new ArrayList<String>();
-    public tokenizer(String Query){
-        Text = Query;
+    public void setText(String text) {
+        Text = text;
     }
 
-    public List<String>  tokenize(){
-        CoreDocument coreDocument = new CoreDocument(Text);
-       stanfordCoreNLP.annotate(coreDocument);
+    private List<String> list = new ArrayList<String>();
+    
+    
+    public tokenizer(String Query){
+        Text = Query;
+       
+    }
 
+    public List<String> tokenize(String Query){
+      
+    CoreDocument coreDocument = new CoreDocument(Query);
+    stanfordCoreNLP.annotate(coreDocument);
        List<CoreLabel> l = coreDocument.tokens();
        for (CoreLabel coreLabel : l) {
-        String lemma = coreLabel.get(CoreAnnotations.LemmaAnnotation.class);
-        String posTag = coreLabel.get(CoreAnnotations.PartOfSpeechAnnotation.class);
-
-        if (posTag.startsWith("VB")) {
-            list.add(lemma);
-        } else {
-            list.add(coreLabel.originalText());
-        }
+        list.add(coreLabel.originalText());
        }
        return list;
     }
