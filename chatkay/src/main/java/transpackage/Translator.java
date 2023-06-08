@@ -111,36 +111,34 @@ public class Translator {
   }
   
   private void Giveword(){
-        
-       
-    while(!IsItRequest){  
+    CodeWhiz checker = new CodeWhiz(user);
+    CodeWhiz.ExternSender = "Linguatron";
+    while(!IsItRequest && WannaTranslate){  
        // System.out.println("######## Is it code:"+IsItCode+"  Is It request:  "+IsItRequest);
         System.out.print(Username+" : ");
         UserAnswer = sc.nextLine();
-        CodeWhiz checker = new CodeWhiz(user);
-        CodeWhiz.ExternSender = "Linguatron";
+        IsItRequest = checker.CheckIfRequest(UserAnswer); 
         if(checker.CheckIfGreetings(UserAnswer)){
-            
+
             continue;
         }
-        IsItRequest = checker.CheckIfRequest(UserAnswer);
+      
 
         if(!IsItRequest){
-            System.out.println("Linguatron : Your questiion is not about translation topic!");
+            System.out.println("Linguatron : Your question is not about translation topic!");
             System.out.println("Linguatron : please try again!");
-        }else{
-            
-                redirect();
-            
         }
         if(IsItRequest){
+          Request = UserAnswer;
+          System.out.println(Request);
             if(Request=="/exit/"){
-                 ReInisialise();
+                // ReInisialise();
             App.setChoix(0);
             App.main(null);
             }
-            if(Request=="/list/"){
-                ReInisialise();
+            if(Request.contains("/list/")){  
+              
+              IsItRequest = false;
                 String filename = "chatkay\\src\\main\\java\\QueriesList.txt";
                  try {
                       List<String> lines = Files.readAllLines(Paths.get(filename));
@@ -152,6 +150,7 @@ public class Translator {
 
                          }
                      System.out.println("########################################");
+                     continue;
 
                      } catch (Exception e) {
                         e.printStackTrace();
@@ -168,9 +167,9 @@ public class Translator {
 
 private String Request;
 public void ReInisialise(){
-  WannaTranslate = false;
-  
+  WannaTranslate = false; 
   Request = "";
+  App.main(null);
 }
 
   private int RecheckQuery(String Query){
@@ -181,8 +180,8 @@ public void ReInisialise(){
     Giveword();
     return 1;
 
-}  else {
-         System.out.println("Linguatron : The query is not related to Translating.");
+    }  else {
+         //System.out.println("Linguatron : The query is not related to Translating.");
         return -1;
     }
 }

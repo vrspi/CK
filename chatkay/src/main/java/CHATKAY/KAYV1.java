@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import Users.User;
+import kay.App;
 
 public class KAYV1 {
 
@@ -102,7 +103,9 @@ public class KAYV1 {
         try {
             Giveword();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("KAYV1 : "+e.getMessage());
+            App.setChoix(0);
+            App.main(null);
         }
     }
     private void Giveword() throws IOException{
