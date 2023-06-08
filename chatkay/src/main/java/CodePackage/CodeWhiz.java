@@ -14,7 +14,7 @@ import kay.App;
 
 public class CodeWhiz {
     private String Username;
-    private String UserAnswer;
+    
     private List<String> programmingKeywords;
     private List<String> wellbeingKeywords;
     private List<String> GreetingsKeywords;
@@ -24,6 +24,7 @@ public class CodeWhiz {
     private Matcher wellbeingMatcher;
     private Pattern wellbeingRegex;
     private String Request;
+    private String UserAnswer;
     private Scanner sc = new Scanner(System.in);
     public String getRequest() {
         return Request;
@@ -34,6 +35,7 @@ public class CodeWhiz {
     public void setGreetingsPattern(String greetingsPattern) {
         this.greetingsPattern = greetingsPattern;
     }
+    public static String ExternSender = null; 
     private Matcher greetingsMatcher;
     private Pattern greetingsRegex;
     private Matcher programmingMatcher;
@@ -102,7 +104,8 @@ public class CodeWhiz {
                 break;
         } ;
     }
-    private boolean CheckIfGreetings(String Query) {
+
+    public boolean CheckIfGreetings(String Query) {
         this.greetingsMatcher = greetingsRegex.matcher(Query);
         this.wellbeingMatcher = wellbeingRegex.matcher(Query);
         int x=0;
@@ -112,7 +115,11 @@ public class CodeWhiz {
                 int index = random.nextInt(GreetingsKeywords.size());
                 
                 String randomString = GreetingsKeywords.get(index);
+                if(ExternSender == null)
                 System.out.println("CodeWhiz : "+randomString);
+                else{
+                    System.out.println(ExternSender + " : "+randomString);
+                }
                 
                 x=1;
                 
@@ -133,17 +140,29 @@ public class CodeWhiz {
 
                 else{
                     x=1;
+                    if(ExternSender == null)
                     System.out.println("CodeWhiz : "+randomString);
+                    else{
+                        System.out.println(ExternSender + " : "+randomString);
+                        
+                    }
                 }
                 
             }
             if(x==1)
             {
+                if(ExternSender == null)
                 System.out.println("CodeWhiz : How can I assist you?");
+                else{
+                    System.out.println(ExternSender + " : "+"How can I assist you?");
+                    ExternSender = null;
+                }
                 return true;
             }
             return false;
     }
+  
+  
     private boolean CheckIfCode(String Query){
         List<String> programmingKeywords = getProgrammingKeywords();
         Query = Query.toLowerCase();
@@ -158,7 +177,7 @@ public class CodeWhiz {
 
         return false;
     }
-    private boolean CheckIfRequest(String Query){
+    public boolean CheckIfRequest(String Query){
         if(Query.startsWith("/exit/")){
             Request ="/exit/";
            return true; 

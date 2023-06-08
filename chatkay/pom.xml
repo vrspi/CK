@@ -25,6 +25,13 @@
     <version>1.2.3</version> <!-- Replace with the latest version -->
 </dependency>
 
+<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+<dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.10.1</version>
+</dependency>
+
     <!-- https://mvnrepository.com/artifact/edu.stanford.nlp/stanford-corenlp -->
 <dependency>
   <groupId>edu.stanford.nlp</groupId>
@@ -37,7 +44,11 @@
   <artifactId>jsoup</artifactId>
   <version>1.15.4</version>
 </dependency>
-
+<dependency>
+    <groupId>org.apache.opennlp</groupId>
+    <artifactId>opennlp-tools</artifactId>
+    <version>1.9.3</version>
+</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

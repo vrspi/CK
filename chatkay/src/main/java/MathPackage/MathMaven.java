@@ -3,7 +3,7 @@ import java.lang.Math;
 public class MathMaven {
     public String Query;
         public static void main(String[] args) {
-<<<<<<< Updated upstream
+
 
         toBinary(31); 
         System.out.println("Hexadecimal of values decimal is: "+toHex(289));  
@@ -22,7 +22,7 @@ public class MathMaven {
         public static void SumNumb(double x,double y){
             //return the sum of two numbers in int you should be concatenate in ineteger
             System.out.println("Sum number  of x and y is : "+Math.addExact((int)x, (int)y));
-=======
+
         //    operatorsimple(6,-3);
         //    TrigonometricMath(90);
         // System.out.println("binary of i is :");
@@ -39,7 +39,7 @@ public class MathMaven {
         // specific(8);
         isprime(8);
     
->>>>>>> Stashed changes
+
         }
 
         public static void SubtractNumb(double x,double y){

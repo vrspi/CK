@@ -1,34 +1,68 @@
 package transpackage;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.lang.reflect.Type;
+
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import CodePackage.CodeWhiz;
+import Users.User;
+import kay.App;
 
 public class Translator {
-  // TODO: If you have your own Premium account credentials, put them down here:
   private static final String CLIENT_ID = "FREE_TRIAL_ACCOUNT";
   private static final String CLIENT_SECRET = "PUBLIC_SECRET";
   private static final String ENDPOINT = "http://api.whatsmate.net/v1/translation/translate";
+  private boolean IsItRequest = false;
+  private String UserAnswer;
+  private Scanner sc = new Scanner(System.in);
+  // public static void main(String[] args) throws Exception {
+  //   String fromLang = "en";
+  //   String toLang = "fr";
+  //   String text = "This is a common question when a developer says, this code is skipping indexes.You are altering the original array and removing the index. So think about it like a stack of blocks. You remove one, all of the ones above it drop down one.So you are removing an item with splice, so you need to reduce the index by one so you do not skip over the item that fills in the gap.";
 
-  /**
-   * Entry Point
-   */
-  public static void main(String[] args) throws Exception {
-    // TODO: Specify your translation requirements here:
-    String fromLang = "en";
-    String toLang = "fr";
-    String text = "This is a common question when a developer says, this code is skipping indexes.You are altering the original array and removing the index. So think about it like a stack of blocks. You remove one, all of the ones above it drop down one.So you are removing an item with splice, so you need to reduce the index by one so you do not skip over the item that fills in the gap.";
+  //   Translator.translate(fromLang, toLang, text);
+  // }
+  private static Map<String, String> languageMap;
+  private String Username;
+  private User user;
 
-    Translator.translate(fromLang, toLang, text);
+  public Translator(User u){
+    user = u;
+    Username = u.GetUsername();
   }
-
-  /**
-   * Sends out a WhatsApp message via WhatsMate WA Gateway.
-   */
+  static {
+    Gson gson = new Gson();
+    Type type = new TypeToken<Map<String, String>>(){}.getType();
+    try (FileReader fileReader = new FileReader("chatkay\\supported-codes.json")) {
+        languageMap = gson.fromJson(fileReader, type);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+  }
+  private static String getLanguageCode(String languageName) {
+    for (Map.Entry<String, String> entry : languageMap.entrySet()) {
+        if (entry.getValue().equalsIgnoreCase(languageName)) {
+            return entry.getKey();
+        }
+    }
+    return null;
+}
+  
   public static void translate(String fromLang, String toLang, String text) throws Exception {
-    // TODO: Should have used a 3rd party library to make a JSON string from an object
     String jsonPayload = new StringBuilder()
       .append("{")
       .append("\"fromLang\":\"")
@@ -57,7 +91,6 @@ public class Translator {
     os.close();
 
     int statusCode = conn.getResponseCode();
-    System.out.println("Status Code: " + statusCode);
     BufferedReader br = new BufferedReader(new InputStreamReader(
         (statusCode == 200) ? conn.getInputStream() : conn.getErrorStream()
       ));
@@ -67,6 +100,112 @@ public class Translator {
     }
     conn.disconnect();
   }
+
+  public void Start(){
+        WannaTranslate = true;
+        System.out.println("Linguatron : Welcome to KAY CodeWhiz Mr/Mme : "+Username);
+        System.out.println("Linguatron : How can I assist you?");
+        Giveword();
+        redirect();
+      
+  }
+  
+  private void Giveword(){
+        
+       
+    while(!IsItRequest){  
+       // System.out.println("######## Is it code:"+IsItCode+"  Is It request:  "+IsItRequest);
+        System.out.print(Username+" : ");
+        UserAnswer = sc.nextLine();
+        CodeWhiz checker = new CodeWhiz(user);
+        CodeWhiz.ExternSender = "Linguatron";
+        if(checker.CheckIfGreetings(UserAnswer)){
+            
+            continue;
+        }
+        IsItRequest = checker.CheckIfRequest(UserAnswer);
+
+        if(!IsItRequest){
+            System.out.println("Linguatron : Your questiion is not about translation topic!");
+            System.out.println("Linguatron : please try again!");
+        }else{
+            
+                redirect();
+            
+        }
+        if(IsItRequest){
+            if(Request=="/exit/"){
+                 ReInisialise();
+            App.setChoix(0);
+            App.main(null);
+            }
+            if(Request=="/list/"){
+                ReInisialise();
+                String filename = "chatkay\\src\\main\\java\\QueriesList.txt";
+                 try {
+                      List<String> lines = Files.readAllLines(Paths.get(filename));
+                      System.out.println("########################################");
+                         for (String line : lines) {
+                         // Do something with each keyword
+                         String Col[] = line.split("-");
+                        System.out.println(Col[0]+"    -    "+Col[1]);
+
+                         }
+                     System.out.println("########################################");
+
+                     } catch (Exception e) {
+                        e.printStackTrace();
+                        }
+             }
+           
+        }
+        ReInisialise();
+
+    }
+    // sc.close();
+}
+
+
+private String Request;
+public void ReInisialise(){
+  WannaTranslate = false;
+  
+  Request = "";
+}
+
+  private int RecheckQuery(String Query){
+    
+   
+    if (WannaTranslate){
+    ReInisialise();
+    Giveword();
+    return 1;
+
+}  else {
+         System.out.println("Linguatron : The query is not related to Translating.");
+        return -1;
+    }
+}
+  private boolean WannaTranslate = false;
+  private void redirect() {
+    switch (RecheckQuery(UserAnswer)) {
+        case 1:
+           
+            break;
+        case 2:
+            
+            break;
+        case -1:
+
+            WannaTranslate = false;
+                        
+            Giveword();
+            break;
+        
+        default:
+            break;
+    } ;
+}
 
 }
 

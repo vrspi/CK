@@ -7,9 +7,12 @@ import CodePackage.CodeWhiz;
 import Tools.tokenizer;
 import Users.Session;
 import Users.User;
+import transpackage.Translator;
 
 public class App 
 {
+
+
     private static int choix=0;
     private static Scanner sc = new Scanner(System.in);
     public static int getChoix() {
@@ -21,7 +24,8 @@ public class App
     }
     public static tokenizer Tokenizer;
     public static void main( String[] args )
-    {   Tokenizer = new tokenizer("");
+    {
+        Tokenizer = new tokenizer("");
         Session session = new Session(new User("Khaireddine", "null"));
         
         System.out.println( "Chat Kay! Bienvenue");
@@ -62,7 +66,9 @@ public class App
                 break;
             
             case 3:
-                
+                Translator Linguatron = new Translator(session.GetUser());
+                Linguatron.Start();
+                App.choix=0;
                 break;
             
             case 4:

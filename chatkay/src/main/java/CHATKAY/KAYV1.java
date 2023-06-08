@@ -1,5 +1,4 @@
 package CHATKAY;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,6 +22,13 @@ public class KAYV1 {
     private boolean IsItCode;
     private boolean IsItRequest;
     private String Request;
+    public String getRequest() {
+        return Request;
+    }
+
+    public void setRequest(String request) {
+        Request = request;
+    }
     private Scanner sc = new Scanner(System.in);
     public String getQuestion() {
         return Question;
@@ -96,7 +102,6 @@ public class KAYV1 {
         try {
             Giveword();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -122,4 +127,4 @@ public class KAYV1 {
 }
 
 
-//432 last save
+//432- last save
