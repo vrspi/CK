@@ -12,6 +12,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.lang.reflect.Type;
 
 
@@ -96,7 +98,7 @@ public class Translator {
       ));
     String output;
     while ((output = br.readLine()) != null) {
-        System.out.println(output);
+        System.out.println("Linguatron : "+output);
     }
     conn.disconnect();
   }
@@ -109,6 +111,34 @@ public class Translator {
         redirect();
       
   }
+  public boolean CheckIfTranslate(String userInput ){
+    Pattern pattern = Pattern.compile("(?:translate|convert|change|switch|alter|modify)\\s+'(.*?)'\\s+(?:to|into)\\s+(.+)", Pattern.CASE_INSENSITIVE);
+    Matcher matcher = pattern.matcher(userInput);
+    if (matcher.find()) {
+      
+      String inputText = matcher.group(1);
+      String targetLanguageName = matcher.group(2).trim();
+
+      String targetLanguageCode = getLanguageCode(targetLanguageName);
+      //System.out.println(targetLanguageCode);
+      if (targetLanguageCode == null) {
+          System.out.println("Linguatron : Target language not found.");
+          return true;
+      }
+
+      try {
+        translate("en", targetLanguageCode, inputText);
+        return true;
+      } catch (Exception e) {
+        System.out.println("Linguatron : "+e.getMessage());
+      }
+      // Now you have inputText and targetLanguageCode
+      // You can use them for translation
+      // System.out.println("Input Text: " + inputText);
+      // System.out.println("Target Language Code: " + targetLanguageCode);
+  }
+    return false;
+  }
   
   private void Giveword(){
     CodeWhiz checker = new CodeWhiz(user);
@@ -118,6 +148,9 @@ public class Translator {
         System.out.print(Username+" : ");
         UserAnswer = sc.nextLine();
         IsItRequest = checker.CheckIfRequest(UserAnswer); 
+        if(CheckIfTranslate(UserAnswer)){
+          continue;
+        }
         if(checker.CheckIfGreetings(UserAnswer)){
 
             continue;
