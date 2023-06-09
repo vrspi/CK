@@ -1,9 +1,13 @@
 package kay;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import CHATKAY.KAYV1;
 import CodePackage.CodeWhiz;
+import KayPlayer.RockPaperScissors;
+import KayPlayer.TicTacToe;
+import KayPlayer.SnakeGame;
 import Tools.tokenizer;
 import Users.Session;
 import Users.User;
@@ -13,7 +17,7 @@ public class App
 {
 
 
-    private static int choix=0;
+    public static int choix=0;
     private static Scanner sc = new Scanner(System.in);
     public static int getChoix() {
         return choix;
@@ -38,7 +42,7 @@ public class App
                 System.out.println("2- KAY CodeWhiz");
                 System.out.println("3- KAY Linguatron");
                 System.out.println("4- KAY Assistify");
-                System.out.println("5- KAY Assitant");
+                System.out.println("5- KAY UltimPlayer");
                 System.out.println("6- ChatKAY");
                 System.out.println("7- Quitter");
                 System.out.println("#############################");
@@ -76,7 +80,12 @@ public class App
                 break;
             
             case 5:
-                
+            // RockPaperScissors game = new RockPaperScissors();
+            // game.start();
+            // TicTacToe game = new TicTacToe();
+            // game.start();
+           
+            App.choix=0;
                 break;
             
             case 6:

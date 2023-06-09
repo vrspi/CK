@@ -9,10 +9,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import Tools.pipline;
-import Tools.tokenizer;
-import edu.stanford.nlp.pipeline.Annotation;
 import kay.App;
 public class CodeScrapper {
     private String Query;
