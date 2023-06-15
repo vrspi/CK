@@ -7,7 +7,7 @@ import CHATKAY.KAYV1;
 import CodePackage.CodeWhiz;
 import KayPlayer.RockPaperScissors;
 import KayPlayer.TicTacToe;
-import KayPlayer.SnakeGame;
+
 import Tools.tokenizer;
 import Users.Session;
 import Users.User;
@@ -30,7 +30,7 @@ public class App
     public static void main( String[] args )
     {
         Tokenizer = new tokenizer("");
-        Session session = new Session(new User("Khaireddine", "null"));
+        Session session = new Session(new User("Amine", "null"));
         
         System.out.println( "Chat Kay! Bienvenue");
         System.out.println("Veuillez choisir un option : ");
@@ -80,10 +80,10 @@ public class App
                 break;
             
             case 5:
-            // RockPaperScissors game = new RockPaperScissors();
-            // game.start();
-            // TicTacToe game = new TicTacToe();
-            // game.start();
+            RockPaperScissors game = new RockPaperScissors();
+            game.start();
+            //  TicTacToe game = new TicTacToe();
+            //  game.start();
            
             App.choix=0;
                 break;
@@ -129,7 +129,7 @@ public class App
             }
             switch (localchoix) {
                 case 1:
-                        Session session = new Session(new User("Khaireddine", "null"));
+                        Session session = new Session(new User("Amine", "null"));
                         KAYV1 KV1 = new KAYV1(session.GetUser());
                         KV1.Start();
                         localchoix=0;

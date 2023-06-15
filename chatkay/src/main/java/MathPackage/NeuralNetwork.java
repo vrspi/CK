@@ -4,7 +4,7 @@ public class NeuralNetwork {
     private Neuron[] hiddenLayer;
     private Neuron outputNeuron;
     private double learningRate = 0.01;
-
+    
     public NeuralNetwork(int numInputs, int numHidden) {
         hiddenLayer = new Neuron[numHidden];
         for (int i = 0; i < numHidden; i++) {
